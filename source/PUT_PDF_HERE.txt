@@ -1,0 +1,2 @@
+Drop the original scanned report PDF in this folder (any filename ending in .pdf).
+extract_images.py reads the first *.pdf it finds here and regenerates assets/img/.
