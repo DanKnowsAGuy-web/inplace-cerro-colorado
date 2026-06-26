@@ -271,23 +271,43 @@
   });
 
   /* -------------------------------------------------------- tab switch */
-  document.querySelectorAll('.tab-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var id = btn.getAttribute('data-tab');
-      document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
-      document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
-      btn.classList.add('active');
-      var panel = document.getElementById(id);
-      panel.classList.add('active');
-      // Land on the tabs bar so it stays a pinned header and the freshly
-      // selected panel begins directly underneath it.
+  // The sticky header stays in the reader's chosen language and only toggles
+  // Full Report <-> Summary. A subtle switch flips language (keeping the same
+  // report type), labelled in the *other* language so each reader recognises it.
+  var LBL = {
+    en: { full: 'Full Report', sum: 'Summary', other: 'Español', aria: 'Cambiar a español / Switch to Spanish' },
+    es: { full: 'Informe Completo', sum: 'Resumen', other: 'English', aria: 'Switch to English / Cambiar a inglés' }
+  };
+  var state = { lang: 'en', type: 'full' };
+  var fullBtn = document.querySelector('.type-btn[data-type="full"]');
+  var sumBtn = document.querySelector('.type-btn[data-type="sum"]');
+  var langSwitch = document.querySelector('.lang-switch');
+
+  function applyTabs(scrollToBar) {
+    var id = state.lang + state.type;
+    document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.toggle('active', p.id === id); });
+    var L = LBL[state.lang];
+    if (fullBtn) { fullBtn.textContent = L.full; fullBtn.classList.toggle('active', state.type === 'full'); }
+    if (sumBtn) { sumBtn.textContent = L.sum; sumBtn.classList.toggle('active', state.type === 'sum'); }
+    if (langSwitch) {
+      langSwitch.querySelector('.ls-txt').textContent = L.other;
+      langSwitch.setAttribute('aria-label', L.aria);
+    }
+    var panel = document.getElementById(id);
+    requestAnimationFrame(function () {
+      if (panel) panel.querySelectorAll('.tb[data-tb-done]').forEach(drawThreshold);
+      onScroll();
+    });
+    if (scrollToBar) {
       var tabsBar = document.querySelector('.tabs-bar');
       if (tabsBar) window.scrollTo({ top: tabsBar.offsetTop, behavior: 'instant' });
-      // Redraw any thresholds now visible in the newly shown panel.
-      requestAnimationFrame(function () {
-        panel.querySelectorAll('.tb[data-tb-done]').forEach(drawThreshold);
-        onScroll();
-      });
-    });
+    }
+  }
+
+  if (fullBtn) fullBtn.addEventListener('click', function () { state.type = 'full'; applyTabs(true); });
+  if (sumBtn) sumBtn.addEventListener('click', function () { state.type = 'sum'; applyTabs(true); });
+  if (langSwitch) langSwitch.addEventListener('click', function () {
+    state.lang = state.lang === 'en' ? 'es' : 'en'; applyTabs(true);
   });
+  applyTabs(false);
 })();
