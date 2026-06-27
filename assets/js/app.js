@@ -101,7 +101,7 @@
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
 
-    var revealSel = '.eyebrow,h2,h3,.lead,.preface,.dc,.tb,.table-wrap,.cred,.pq,.fig,.gal figure,.cert figure,.mapwrap,.doc-title,.doc-meta';
+    var revealSel = '.eyebrow,h2,h3,.lead,.preface,.dc,.tb,.table-wrap,.cred,.pq,.fig,.gal figure,.cert figure,.mapwrap,.doc-title,.doc-meta,.eqp-grid,.green-note';
     document.querySelectorAll(revealSel).forEach(function (el) {
       el.classList.add('reveal');
       revealObs.observe(el);

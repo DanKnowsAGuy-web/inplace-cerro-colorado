@@ -149,6 +149,17 @@ strong{color:var(--ink);font-weight:600;}
 .doc-meta-k{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-light);margin-bottom:7px;}
 .doc-meta-v{font-size:16px;color:var(--ink);font-weight:500;line-height:1.4;}
 
+/* --- plant & equipment list --- */
+.eqp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:18px 0 8px;max-width:820px;}
+.eqp{background:#fff;border:1px solid var(--stone-dark);border-left:3px solid var(--bronze);padding:13px 16px;font-size:15px;color:var(--ink-warm);line-height:1.45;}
+.eqp b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:17px;letter-spacing:.02em;color:var(--ink);font-weight:600;}
+
+/* --- environmental callout --- */
+.green-note{background:rgba(56,78,52,.07);border:1px solid var(--sage-light);border-left:3px solid var(--sage);padding:22px 26px;max-width:820px;margin:28px 0;}
+.green-label{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.green-label::before{content:"";width:22px;height:1px;background:var(--sage-light);display:inline-block;}
+.green-note p{margin:0;color:var(--ink-mid);font-size:16px;line-height:1.7;}
+
 /* ============================================================
    Interactive enhancements
    ============================================================ */
