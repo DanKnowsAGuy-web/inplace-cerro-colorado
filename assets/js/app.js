@@ -144,7 +144,7 @@
   function buildScrolly(sec) {
     var steps = Array.prototype.slice.call(sec.querySelectorAll('.ps'));
     if (steps.length < 2) return;
-    var imgs = ['pg10_1', 'pg11_1', 'pg10_1', 'pg12_1', 'pg30_1'];
+    var imgs = ['hr_grade', 'hr_cistern', 'hr_spray', 'pg12_1', 'pg30_1'];
     var host = steps[0].parentNode;
     var scrolly = document.createElement('div'); scrolly.className = 'scrolly';
     var visual = document.createElement('div'); visual.className = 'scrolly-visual';
